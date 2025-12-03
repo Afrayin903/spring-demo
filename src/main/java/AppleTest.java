@@ -21,6 +21,7 @@ public class AppleTest {
 //                .toList();
 
         prettyPrintApple2(inventory, new AppleFancyFormatter());
+        prettyPrintApple2(inventory, new AppleSimpleFormatter());
 
     }
 

@@ -5,12 +5,12 @@ public class AppleFancyFormatter implements AppleFormatter{
         String category =
                 (apple.getWeight() < 100) ? "LIGHT" : (apple.getWeight() > 150) ? "HEAVY"
                         : "LIGHT";
-        String weight = "An apple of " + apple.getWeight();
+        String appleWeight = "An apple of " + apple.getWeight() + "g";
 
         return switch (category) {
-            case "LIGHT" -> "A Light " + apple.getColor() + " apple. " + weight;
-            case "HEAVY" -> "A Heavy " + apple.getColor() + " apple. " + weight;
-            default       -> "A Mid Light " + apple.getColor() + " apple. " + weight;
+            case "LIGHT" -> "A Light " + apple.getColor() + " apple. " + appleWeight;
+            case "HEAVY" -> "A Heavy " + apple.getColor() + " apple. " + appleWeight;
+            default       -> "A Mid Light " + apple.getColor() + " apple. " +appleWeight;
         };
 //       if(apple.getWeight() < 100){
 //            return  "A Light " + apple.getColor() + " apple";
