@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class AppleTest {
     public static void main(String[] args) {
@@ -9,31 +10,33 @@ public class AppleTest {
         inventory.add(new Apple(155, Color.GREEN));
         inventory.add(new Apple(120, Color.ORANGE));
 
-        List<Apple> appleColor = filterApples(inventory, new AppleColorPredicate());
-        System.out.println(appleColor);
-        List<Apple> heavyApple = filterApples(inventory, new AppleHeavyPredicate());
-        System.out.println(heavyApple);
-        List<Apple> lightApple = filterApples(inventory, new AppleLightPredicate());
-        System.out.println(lightApple);
+//        List<Apple> appleColor = filterApples(inventory, new AppleColorPredicate());
+//        System.out.println(appleColor);
+//        List<Apple> heavyApple = filterApples(inventory, new AppleHeavyPredicate());
+//        System.out.println(heavyApple);
+//        List<Apple> lightApple = filterApples(inventory, new AppleLightPredicate());
+//        System.out.println(lightApple);
 
 //        List<Apple> lightApples = inventory.stream()
 //                .filter(apple -> apple.getWeight() < 100)
 //                .toList();
 
-        prettyPrintApple2(inventory, new AppleFancyFormatter());
-        prettyPrintApple2(inventory, new AppleSimpleFormatter());
+          List <Apple> greenColor = filterApples(inventory, apple -> apple.getColor().equals(Color.GREEN));
+          System.out.println(greenColor);
+//        prettyPrintApple2(inventory, new AppleFancyFormatter());
+//        prettyPrintApple2(inventory, new AppleSimpleFormatter());
 
     }
 
-    private static List<Apple> filterApples(List<Apple> inventory, ApplePredicate applePredicate) {
-        List<Apple> result = new ArrayList<>();
-        for (Apple apple : inventory){
-            if (applePredicate.test(apple)){
-                result.add(apple);
-            }
-        }
-        return result;
-    }
+//    private static List<Apple> filterApples(List<Apple> inventory, ApplePredicate applePredicate) {
+//        List<Apple> result = new ArrayList<>();
+//        for (Apple apple : inventory){
+//            if (applePredicate.test(apple)){
+//                result.add(apple);
+//            }
+//        }
+//        return result;
+//    }
 
     private static void prettyPrintApple2(List<Apple> inventory, AppleFormatter formatter){
         for (Apple apple : inventory){
@@ -53,5 +56,13 @@ public class AppleTest {
 //        }
 //    }
 
-
+    private static List<Apple> filterApples(List<Apple> inventory, Predicate<Apple> appleP) {
+        List<Apple> result = new ArrayList<>();
+        for (Apple apple : inventory){
+            if (appleP.test(apple)){
+                result.add(apple);
+            }
+        }
+        return result;
+    }
 }

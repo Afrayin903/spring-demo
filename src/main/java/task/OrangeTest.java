@@ -2,6 +2,8 @@ package task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
 /* Lambda expression has two rules:
 1. lambda expression need an interface
 2. Interface has to same signature with lambda expression
@@ -21,19 +23,36 @@ public class OrangeTest {
         //first way
         //prettyPrintOrange(inventory, Orange::toString);
         //second way
-        OrangeFormatter simpleFormatter = orange-> "An orange of " + orange.getWeight() + "g";
-        prettyPrintOrange(inventory, simpleFormatter);
+//        OrangeFormatter simpleFormatter = orange-> "An orange of " + orange.getWeight() + "g";
+//        prettyPrintOrange(inventory, simpleFormatter);
+//
+//        OrangeFormatter fancyFormatter = orange-> {
+//            String category = orange.getWeight()>200 ? "Heavy" : "Light";
+//            return "A " + category + " " + orange.getColor() + " orange";
+//        };
+//        prettyPrintOrange(inventory, fancyFormatter);
 
-        OrangeFormatter fancyFormatter = orange-> {
-            String category = orange.getWeight()>200 ? "Heavy" : "Light";
-            return "A " + category + " " + orange.getColor() + " orange";
-        };
-        prettyPrintOrange(inventory, fancyFormatter);
+        prettyPrintOrange (inventory, o ->
+        {
+            System.out.println("A " + (o.getWeight() > 200 ? "Heavy" : "Light")
+                    + " " + o.getColor() + " orange");
+            return o;
+        });
     }
-    private static void prettyPrintOrange (List<Orange> inventory, OrangeFormatter formatter){
-        for (Orange orange : inventory){
-            String output = formatter.accept(orange);
-            System.out.println(output);
-        }
+//    private static void prettyPrintOrange (List<Orange> inventory, OrangeFormatter formatter){
+//        for (Orange orange : inventory){
+//            String output = formatter.accept(orange);
+//            System.out.println(output);
+//        }
+//    }
+
+
+    //Using functional interface for lambda expression
+    private static void prettyPrintOrange (List<Orange> inventory, Function<Orange, Orange> format){
+        for (Orange orange : inventory) {
+             Orange obj = format.apply(orange);
+              System.out.println(obj);
+            }
     }
+
 }
