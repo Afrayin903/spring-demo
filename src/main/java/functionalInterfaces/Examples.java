@@ -23,5 +23,9 @@ public class Examples {
         //============SUPPLIER =========================
         Supplier <Double> random = () -> Math.random();
         System.out.println(random.get());
+
+
+        BiFunction <PracticeClass, Integer, Double> v3 = PracticeClass::method;
+
     }
 }
