@@ -1,6 +1,8 @@
 package task;
 
 import java.util.Comparator;
+import java.util.Optional;
+import java.util.function.BinaryOperator;
 
 import static java.util.Comparator.comparing;
 
@@ -34,7 +36,16 @@ public class DishTask {
                 .map(Dish::getName)
                 .forEach(System.out::println);
 
+        //print highest calories and lowest calories
+        System.out.println("A===============================");
+        Optional<Dish> max = DishData.getAll().stream().max(comparing(Dish::getCalories));
+        System.out.println(max);
+
+        Optional<Dish> max2 = DishData.getAll().stream().reduce(BinaryOperator.maxBy(comparing(Dish::getCalories)));
+        System.out.println(max2);
 
 
     }
+
+
 }
